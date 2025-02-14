@@ -1,6 +1,7 @@
 package com.trackApplication.TrackApplication.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,18 @@ public class ActivityServices {
         return activityRepository.findAll();
     }
 
+    public List<ActivityModel> getPendingActivities() {
+        return activityRepository.findPendingActivities();
+    }
+
     public ActivityModel addActivity(ActivityModel activity) {
         return activityRepository.save(activity);
+    }
+
+    public Optional<ActivityModel> markActivityDone(UUID id) {
+        activityRepository.markActivityDone(id);
+        Optional<ActivityModel> activityModel = activityRepository.findById(id);
+        return activityModel;
     }
 
     public UUID deleteActivity(UUID id) {

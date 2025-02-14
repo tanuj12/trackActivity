@@ -28,6 +28,12 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<flyway.url>jdbc:postgresql://localhost:5432/Tracker</flyway.url>
+		<flyway.user>postgres</flyway.user>
+		<flyway.password>root</flyway.password>
+		<flyway.driver>org.postgresql.Driver</flyway.driver>
+		<flyway.locations>classpath:db/migration</flyway.locations>
+			
 	</properties>
 	<dependencies>
 		<dependency>
@@ -58,6 +64,12 @@
 			<artifactId>postgresql</artifactId>
         	<version>42.5.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>9.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -65,6 +77,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>9.0.0</version>
+				<configuration>
+					<url>${flyway.url}</url>
+					<user>${flyway.user}</user>
+					<password>${flyway.password}</password>
+					<driver>${flyway.driver}</driver>
+					<baselineOnMigrate>${spring.flyway.baselineOnMigrate}</baselineOnMigrate>
+					<locations>${flyway.locations}</locations>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

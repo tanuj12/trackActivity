@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,19 @@ public class ActivityController {
         return activityServices.getAllActivities();
     }
 
+    @GetMapping("/pending")
+    public List<ActivityModel> getPendingActivity() {
+        return activityServices.getPendingActivities();
+    }
+
     @PostMapping()
     public List<ActivityModel> postActivity(@RequestBody ActivityModel activityModel) {
         return Collections.singletonList(activityServices.addActivity(activityModel));
+    }
+
+    @PostMapping("/done/{id}")
+    public List<Optional<ActivityModel>> markActivityDone(@PathVariable UUID id) {
+        return Collections.singletonList(activityServices.markActivityDone(id));
     }
 
     @DeleteMapping("/{id}")

@@ -20,6 +20,13 @@ public class ActivityModel {
     public UUID id;
     String task;
     String description;
+    Boolean isDone;
+    public Boolean getIsDone() {
+        return isDone;
+    }
+    public void setIsDone(Boolean isDone) {
+        this.isDone = isDone;
+    }
     public ActivityModel(String task, String description) {
         this.task = task;
         this.description = description;

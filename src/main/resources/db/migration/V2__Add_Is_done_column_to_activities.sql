@@ -1,0 +1,2 @@
+ALTER TABLE activites
+    ADD COLUMN is_done BOOLEAN DEFAULT FALSE;
